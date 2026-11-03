@@ -1,4 +1,4 @@
-# 🇧🇴 OJO CAMBA — Backend GIS & Agente Ciudadano SCZ
+# OJO CAMBA — Backend GIS & Agente Ciudadano SCZ
 
 Backend de alto rendimiento para **OJO CAMBA**, una plataforma orientada a la **prevención del delito**, **reporte colaborativo de siniestros viales** y **mapeo geoespacial de zonas críticas y corredores seguros** en Santa Cruz de la Sierra, Bolivia.
 
