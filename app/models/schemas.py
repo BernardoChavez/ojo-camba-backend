@@ -43,6 +43,7 @@ class IncidentCreateRequest(BaseModel):
     neighborhood: Optional[str] = Field(None, example="Equipetrol")
     anillo: Optional[int] = Field(None, ge=1, le=10, example=2)
     reporter_alias: Optional[str] = Field("Vecino Alerta", example="Vecino Alerta")
+    photo_base64: Optional[str] = Field(None, description="Cadena Base64 de la foto de evidencia tomada con la cámara")
 
     def to_geojson_point(self) -> GeoJSONPoint:
         # Strict GeoJSON ordering: [longitude, latitude]
@@ -66,6 +67,7 @@ class IncidentResponse(BaseModel):
     reporter_alias: Optional[str] = None
     confirmations_count: int
     ai_triage: Optional[Dict[str, Any]] = None
+    photo_base64: Optional[str] = None
     created_at: datetime
     updated_at: datetime
 

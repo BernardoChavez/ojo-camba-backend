@@ -27,6 +27,7 @@ def serialize_incident(inc: Incident) -> IncidentResponse:
         reporter_alias=inc.reporter_alias,
         confirmations_count=inc.confirmations_count,
         ai_triage=inc.ai_triage,
+        photo_base64=inc.photo_base64,
         created_at=inc.created_at,
         updated_at=inc.updated_at,
     )
@@ -96,6 +97,7 @@ async def create_report(payload: IncidentCreateRequest):
         reporter_alias=payload.reporter_alias or "Vecino Alerta",
         confirmations_count=1,
         ai_triage=triage_result,
+        photo_base64=payload.photo_base64,
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow(),
     )

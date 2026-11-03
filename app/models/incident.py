@@ -82,6 +82,7 @@ class Incident(Document):
         default=None,
         description="Resultado del triaje automatizado por IA (prioridad, recomendaciones, alerta inmediata)",
     )
+    photo_base64: Optional[str] = Field(None, description="Foto de evidencia fotográfica en Base64 o URL")
 
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
