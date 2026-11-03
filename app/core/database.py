@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from typing import Optional
+import certifi
 from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
 
@@ -21,7 +22,18 @@ class DatabaseManager:
         from app.models.incident import Incident
 
         logger.info("Connecting to MongoDB at: %s", settings.MONGODB_URL)
-        self.client = AsyncIOMotorClient(settings.MONGODB_URL, serverSelectionTimeoutMS=10000)
+        
+        # Configure client with standard CA bundle for cloud platforms like Render
+        client_kwargs = {
+            "serverSelectionTimeoutMS": 10000,
+        }
+        try:
+            ca_file = certifi.where()
+            client_kwargs["tlsCAFile"] = ca_file
+        except Exception as cert_err:
+            logger.warning("Could not load certifi CA bundle: %s", cert_err)
+
+        self.client = AsyncIOMotorClient(settings.MONGODB_URL, **client_kwargs)
         await self.client.admin.command("ping")
 
         db = self.client[settings.MONGODB_DB_NAME]
