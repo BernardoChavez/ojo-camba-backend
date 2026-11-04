@@ -59,6 +59,8 @@ async def create_report(payload: IncidentCreateRequest):
         existing_duplicate.confirmations_count += 1
         if existing_duplicate.confirmations_count >= 3 and existing_duplicate.status == IncidentStatus.ACTIVO:
             existing_duplicate.status = IncidentStatus.VERIFICADO
+        if payload.photo_base64:
+            existing_duplicate.photo_base64 = payload.photo_base64
         existing_duplicate.updated_at = datetime.utcnow()
         await existing_duplicate.save()
         return serialize_incident(existing_duplicate)
